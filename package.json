@@ -1,0 +1,28 @@
+{
+  "name": "curso-clean-code-architecture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && jest dist/",
+    "tsc:init": "tsc --init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FabriciaDiniz/curso-clean-code-architecture.git"
+  },
+  "author": "Fabrícia Diniz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FabriciaDiniz/curso-clean-code-architecture/issues"
+  },
+  "homepage": "https://github.com/FabriciaDiniz/curso-clean-code-architecture#readme",
+  "dependencies": {
+    "typescript": "^4.2.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "jest": "^26.6.3"
+  }
+}
