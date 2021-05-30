@@ -1,20 +1,34 @@
 import EnrollStudent from "./EnrollStudent";
-import { Student } from "./entities/Student";
 
-test("Should not enroll without valid student name", () => {
-    const enrollment = new EnrollStudent();
-    const student = new Student("Ana#45", "427.144.060-41");
-
-    const enrollmentRequest = { student };
-
-    expect(() => enrollment.execute(enrollmentRequest)).toThrow(new Error("Invalid student name"));
+test("Should not enroll without valid student name", function () {
+    const enrollStudent = new EnrollStudent();
+    const enrollmentRequest = {
+        student: {
+            name: "Ana"
+        }
+    };
+    expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error("Invalid name"));
 });
 
-test("Should not enroll without valid student cpf", () => {
-    const enrollment = new EnrollStudent();
-    const student = new Student("Maria Joaquina", "123.456.789-99");
+test("Should not enroll without valid student cpf", function () {
+    const enrollStudent = new EnrollStudent();
+    const enrollmentRequest = {
+        student: {
+            name: "Ana Maria",
+            cpf: "213.345.654-10"
+        }
+    };
+    expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error("Invalid CPF"));
+});
 
-    const enrollmentRequest = { student };
-
-    expect(() => enrollment.execute(enrollmentRequest)).toThrow(new Error("Invalid CPF"));
+test("Should not enroll duplicated student", function () {
+    const enrollStudent = new EnrollStudent();
+    const enrollmentRequest = {
+        student: {
+            name: "Ana Maria",
+            cpf: "864.464.227-84"
+        }
+    };
+    enrollStudent.execute(enrollmentRequest);
+    expect(() => enrollStudent.execute(enrollmentRequest)).toThrow(new Error("Enrollment with duplicated student is not allowed"));
 });

@@ -1,21 +1,18 @@
 import { Student } from "./entities/Student";
 
-export type EnrollmentRequest = {
-    student: Student,
-}
-
 export default class EnrollStudent {
-    studentList: Student[] = [];
+    enrollments: any[];
 
-    execute(request: EnrollmentRequest): number | Error {
-        const name = request.student.getName();
-        const cpf = request.student.getCpf();
+    constructor () {
+        this.enrollments = [];
+    }
 
-        const newStudent = new Student(name, cpf);
-
-        if (this.studentList.includes(newStudent)) {
-            return new Error("Enrollment with duplicated student is not allowed.");
-        }
-        return this.studentList.push(newStudent);
+    execute(enrollmentRequest: any) {
+        const student = new Student(enrollmentRequest.student.name, enrollmentRequest.student.cpf);
+        const existingEnrollment = this.enrollments.find(enrollment => enrollment.student.cpf.value === enrollmentRequest.student.cpf);
+        if (existingEnrollment) throw new Error("Enrollment with duplicated student is not allowed");
+        const enrollment = { student };
+        this.enrollments.push(enrollment);
+        return enrollment;
     }
 }
