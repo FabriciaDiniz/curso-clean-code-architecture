@@ -1,4 +1,4 @@
-import validateCpf from "../helpers/ValidateCpf";
+import validateCpf from "../ValidateCpf";
 
 export default class Cpf {
     value: string;
